@@ -4,18 +4,41 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | YourGameName</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
+    <style>
+        body { padding: 0; margin: 0; }
+        #unity-container { position: absolute; width: 100%; height: 100%; }
+        #unity-canvas { background: #231F20; width: 100%; height: 100%; }
+        #loading-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
+        #unity-loading-bar { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        #unity-progress-bar-empty { width: 80%; height: 24px; margin: 10px 20px 20px 10px; border: 1px solid white; padding: 2px; }
+        #unity-progress-bar-full { width: 0%; height: 100%; background: white; }
+    </style>
 </head>
 <body>
-    <div id="unity-container" class="unity-desktop">
+    <div id="unity-container">
         <canvas id="unity-canvas"></canvas>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>
+    <div id="loading-cover" style="display:none;">
+        <div id="unity-loading-bar">
+            <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database-compat.js"></script>
+
     <script>
-        var firebaseConfig = {
-            // Your Firebase configuration here
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+        apiKey: "AIzaSyCQGp50ZRrgmm1nqEz_hyL1jz7XLijYQ2o", // Your actual API key
+        authDomain: "hamster-inc.firebaseapp.com",
+        projectId: "hamster-inc",
+        storageBucket: "hamster-inc.appspot.com",
+        messagingSenderId: "107635131206172910731",
+        appId: "1:34885571286:android:06eb3884f7e17e5d916f77" // Your actual App ID
         };
 
         // Initialize Firebase
@@ -56,13 +79,20 @@
             productVersion: "1.0",
         };
 
+        var loadingCover = document.querySelector("#loading-cover");
+        var progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+        var progressBarFull = document.querySelector("#unity-progress-bar-full");
+
+        loadingCover.style.display = "";
+
         var script = document.createElement("script");
         script.src = loaderUrl;
         script.onload = () => {
             createUnityInstance(document.querySelector("#unity-canvas"), config, (progress) => {
-                // Progress update function if needed
+                progressBarFull.style.width = 100 * progress + "%";
             }).then((instance) => {
                 unityInstance = instance;
+                loadingCover.style.display = "none";
                 console.log("Unity instance created successfully");
             }).catch((message) => {
                 alert(message);
