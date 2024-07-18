@@ -3,33 +3,26 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | YourGameName</title>
+    <title>Unity WebGL Player | Hamster Firebase Direct</title>
 </head>
 <body>
     <div id="unity-container">
         <canvas id="unity-canvas"></canvas>
     </div>
-    <div id="loading-cover" style="display:none;">
-        <div id="unity-loading-bar">
-            <div id="unity-progress-bar-empty">
-                <div id="unity-progress-bar-full"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    
+    <!-- Firebase SDK scripts -->
     <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database-compat.js"></script>
 
     <script>
         // Your web app's Firebase configuration
         const firebaseConfig = {
-        apiKey: "AIzaSyCQGp50ZRrgmm1nqEz_hyL1jz7XLijYQ2o", // Your actual API key
-        authDomain: "hamster-inc.firebaseapp.com",
-        projectId: "hamster-inc",
-        storageBucket: "hamster-inc.appspot.com",
-        messagingSenderId: "107635131206172910731",
-        appId: "1:34885571286:android:06eb3884f7e17e5d916f77" // Your actual App ID
+            apiKey: "YourAPIKey", // Replace with your actual API key
+            authDomain: "hamster-inc.firebaseapp.com",
+            projectId: "hamster-inc",
+            storageBucket: "hamster-inc.appspot.com",
+            messagingSenderId: "107635131206172910731",
+            appId: "YourAppID" // Replace with your actual App ID
         };
 
         // Initialize Firebase
@@ -59,34 +52,28 @@
         }
 
         var buildUrl = "Build";
-        var loaderUrl = buildUrl + "/YourBuildName.loader.js";
+        var loaderUrl = buildUrl + "/Hamster Firebase Direct.loader.js";
         var config = {
-            dataUrl: buildUrl + "/YourBuildName.data",
-            frameworkUrl: buildUrl + "/YourBuildName.framework.js",
-            codeUrl: buildUrl + "/YourBuildName.wasm",
+            dataUrl: buildUrl + "/Hamster Firebase Direct.data.unityweb",
+            frameworkUrl: buildUrl + "/Hamster Firebase Direct.framework.js.unityweb",
+            codeUrl: buildUrl + "/Hamster Firebase Direct.wasm.unityweb",
             streamingAssetsUrl: "StreamingAssets",
-            companyName: "YourCompanyName",
-            productName: "YourGameName",
+            companyName: "HamsterInc",
+            productName: "Hamster Firebase Direct",
             productVersion: "1.0",
         };
-
-        var loadingCover = document.querySelector("#loading-cover");
-        var progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
-        var progressBarFull = document.querySelector("#unity-progress-bar-full");
-
-        loadingCover.style.display = "";
 
         var script = document.createElement("script");
         script.src = loaderUrl;
         script.onload = () => {
             createUnityInstance(document.querySelector("#unity-canvas"), config, (progress) => {
-                progressBarFull.style.width = 100 * progress + "%";
+                // Optional: Progress bar or loading indicator logic
             }).then((instance) => {
                 unityInstance = instance;
-                loadingCover.style.display = "none";
                 console.log("Unity instance created successfully");
             }).catch((message) => {
-                alert(message);
+                console.error("Failed to create Unity instance:", message);
+                // Optional: Display error message to the user
             });
         };
         document.body.appendChild(script);
