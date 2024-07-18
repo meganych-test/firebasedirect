@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "34885571286",
+    "firebase_url": "https://hamster-inc-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "hamster-inc",
+    "storage_bucket": "hamster-inc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34885571286:android:72b12b8dca22dc12916f77",
+        "android_client_info": {
+          "package_name": "Hamster.Inc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQGp50ZRrgmm1nqEz_hyL1jz7XLijYQ2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34885571286:android:06eb3884f7e17e5d916f77",
+        "android_client_info": {
+          "package_name": "Hamster.inc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQGp50ZRrgmm1nqEz_hyL1jz7XLijYQ2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
